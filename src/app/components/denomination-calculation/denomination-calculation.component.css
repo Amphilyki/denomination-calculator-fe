@@ -1,0 +1,21 @@
+.denomination {
+    display: flex;
+    flex-direction: column;
+    width: 10rem;
+    padding: 1rem;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+input, button, label{
+    margin-bottom: 1rem;
+}
+
+.denomination-difference{
+    display: flex;
+    flex-direction: column;
+    width: 10rem;
+    padding: 1rem;
+}

@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="denomination">
+        <label for="new Amount:"> New Amount: </label>
+        <input type="number" value="0" step="0.01" id="new Amount" [(ngModel)]="newAmount" />
+        <button (click)="calculateDenomination()">Calculate Denomination</button>
+        <app-denomination-table [denominationValues]="denominations"></app-denomination-table>
+    </div>
+    <div class="denomination-difference">
+        <label>Old Amount:</label> 
+        <label>{{oldAmount}}</label>
+        <button (click)="calculateDifference()">Calculate Difference</button>
+        <app-denomination-table [denominationValues]="differenceInDenominations"></app-denomination-table>
+    </div>
+</div>
