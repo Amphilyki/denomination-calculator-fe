@@ -91,6 +91,7 @@ export class DenominationCalculationComponent implements OnInit {
     const calculatedDenominations: Map<string, number> = new Map();
 
     for (let nextDenomination of this.availableDenominations) {
+      amount = Math.round((amount + Number.EPSILON) * 100) / 100;
       let nextDenominationAsNumber: number = Number(nextDenomination);
       if (amount >= nextDenominationAsNumber) {
         var value = 0;
