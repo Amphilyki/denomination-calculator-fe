@@ -11,6 +11,7 @@
     <button (click)="calculateDenomination()">Calculate Denomination</button>
     <app-denomination-table
       [denominationValues]="denominations"
+      [secondColumnName]="quantityString"
     ></app-denomination-table>
   </div>
   <div class="denomination-difference">
@@ -19,6 +20,7 @@
     <button (click)="calculateDifference()">Calculate Difference</button>
     <app-denomination-table
       [denominationValues]="differenceInDenominations"
+      [secondColumnName]="differenceString"
     ></app-denomination-table>
   </div>
   <div class="calculatio location">

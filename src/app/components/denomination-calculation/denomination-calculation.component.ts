@@ -13,6 +13,8 @@ import { catchError } from 'rxjs';
 })
 export class DenominationCalculationComponent implements OnInit {
   apiService = inject(ApiService);
+  quantityString : string = 'Quantity';
+  differenceString: string = 'Difference';
   denominations: Map<string, number> = new Map();
   differenceInDenominations: Map<string, number> = new Map();
   amountsHistory: number[] = [0];

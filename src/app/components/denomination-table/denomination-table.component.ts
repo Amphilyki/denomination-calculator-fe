@@ -9,4 +9,5 @@ import { CommonModule } from '@angular/common';
 })
 export class DenominationTableComponent {
   @Input() denominationValues: any;
+  @Input() secondColumnName: any;
 }

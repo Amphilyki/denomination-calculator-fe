@@ -1,7 +1,7 @@
 .denomination {
   display: flex;
   flex-direction: column;
-  width: 10rem;
+  width: 12rem;
   padding: 1rem;
 }
 .container {
@@ -18,6 +18,6 @@ label {
 .denomination-difference {
   display: flex;
   flex-direction: column;
-  width: 10rem;
+  width: 12rem;
   padding: 1rem;
 }
