@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import ApiService from '../../services/api.service';
 import { DenominationTableComponent } from '../denomination-table/denomination-table.component';
 import { FormsModule } from '@angular/forms';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-denomination-calculation',
@@ -14,12 +15,14 @@ import { FormsModule } from '@angular/forms';
 
 export class DenominationCalculationComponent implements OnInit{
 
-  denominationCalculatorService = inject(ApiService);
+  apiService = inject(ApiService);
   denominations :  Map<string, number> = (new Map);
   differenceInDenominations : Map<string, number> = (new Map);
   amountsHistory :  number[] = [0];
+  insertedAmount : number = 0;
   newAmount: number = 0;
   oldAmount: number = 0;
+  calculation : string = "backend";
   
   availableDenominations : number[] = [200, 100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01];
 
@@ -40,18 +43,32 @@ export class DenominationCalculationComponent implements OnInit{
       ['0.02', 0],
       ['0.01', 0]
     ]);
+    this.calculation = "backend";
   } 
 
 
   calculateDenomination(){
-    let amount : number = this.newAmount;
-    this.amountsHistory.unshift(this.newAmount);
-    this.oldAmount = this.amountsHistory[1];
-    if (this.amountsHistory.length>2) {
-      this.amountsHistory.pop();
+    this.newAmount = this.insertedAmount;
+    if (this.calculation==="backend"){
+      this.apiService.getDenominations(this.newAmount).pipe(
+        catchError((err)=> {
+          console.log(err);
+          throw err;
+        })
+      ).subscribe((result)=> {
+        this.denominations = result;
+      });
     }
-    const calculatedDenominations: Map<string, number> = this.calculateDenominationsForAmount(amount);
-  this.denominations = calculatedDenominations;
+   else {
+    const calculatedDenominations: Map<string, number> = this.calculateDenominationsForAmount(this.newAmount);
+    this.denominations = calculatedDenominations;
+  }
+  this.amountsHistory.unshift(this.newAmount);
+  this.oldAmount = this.amountsHistory[1];
+  if (this.amountsHistory.length>2) {
+    this.amountsHistory.pop();
+  }
+  this.differenceInDenominations = (new Map);
   }
 
      calculateDenominationsForAmount(amount: number) {
@@ -73,6 +90,17 @@ export class DenominationCalculationComponent implements OnInit{
 
 
   calculateDifference(){
+    if (this.calculation==="backend"){
+      this.apiService.getDenominationsDifference(this.newAmount, this.oldAmount).pipe(
+        catchError((err)=> {
+          console.log(err);
+          throw err;
+        })
+      ).subscribe((result)=> {
+        this.differenceInDenominations = result;
+      });
+    }
+    else {
     const differenceInDenominations: Map<string, number> = new Map;
     const newDenominations = this.calculateDenominationsForAmount(this.newAmount);
     const oldDenominations = this.calculateDenominationsForAmount(this.oldAmount);
@@ -94,6 +122,7 @@ export class DenominationCalculationComponent implements OnInit{
       });
     }
     this.differenceInDenominations = differenceInDenominations;
+  }
   }
 
 }

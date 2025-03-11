@@ -1,14 +1,21 @@
 <div class="container">
     <div class="denomination">
-        <label for="new Amount:"> New Amount: </label>
-        <input type="number" value="0" step="0.01" id="new Amount" [(ngModel)]="newAmount" />
+        <label for="new Amount:"> Insert amount: </label>
+        <input type="number" value="0" step="0.01" id="new Amount" [(ngModel)]="insertedAmount" />
         <button (click)="calculateDenomination()">Calculate Denomination</button>
         <app-denomination-table [denominationValues]="denominations"></app-denomination-table>
     </div>
     <div class="denomination-difference">
-        <label>Old Amount:</label> 
-        <label>{{oldAmount}}</label>
+        <label>New Amount: {{newAmount}}</label>
+        <label>Old Amount: {{oldAmount}}</label> 
         <button (click)="calculateDifference()">Calculate Difference</button>
         <app-denomination-table [denominationValues]="differenceInDenominations"></app-denomination-table>
+    </div>
+    <div class="calculatio location">
+        <p>Calculation in: </p>
+        <input type="radio" id="BE" name="calculation location"  [(ngModel)]="calculation" value="backend">
+        <label for="BE">Backend</label> <br>
+        <input type="radio" id="FE" name="calculation location" [(ngModel)]="calculation" value="frontend">
+        <label for="FE">Frontend</label>
     </div>
 </div>

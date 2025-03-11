@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -6,32 +7,18 @@ import { Injectable } from '@angular/core';
 
 export default class ApiService {
 
-  denominationsPlaceholder: Map<string, number> = new Map([
-    ['200.0', 0],
-    ['100.0', 0],
-    ['50.0', 0],
-    ['20', 0],
-    ['10', 0],
-    ['5.0', 0],
-    ['2.0', 0],
-    ['1', 0],
-    ['0.5', 0],
-    ['0.2', 0],
-    ['0.1', 0],
-    ['0.05', 0],
-    ['0.02', 0],
-    ['0.01', 0]
-  ]);
-  
-  getDenominations(){
-    return this.denominationsPlaceholder;
+  http = inject(HttpClient);
+
+  getDenominations( amount: number){
+    const url = 'http://localhost:8080/euro-denomination-calculator/' + amount;
+    console.log('sending GET request to ' + url);
+    return this.http.get<Map<string, number>>(url); 
   }
 
-  getDenominationsDifference(){
-    return this.denominationsPlaceholder
-  }
-
-  ngOnInit(): void {
+  getDenominationsDifference(newAmount: number, oldAmount : number){
+    const url = 'http://localhost:8080/euro-denomination-calculator/' + newAmount + '/difference-from/' + oldAmount;
+    console.log('sending GET request to ' + url);
+    return this.http.get<Map<string, number>>(url); 
   }
 
 }
