@@ -9,7 +9,14 @@
         *ngFor="let denomination of denominationValues | keyvalue : returnZero"
       >
         <td class="firstCol">{{ denomination.key }}</td>
-        <td class="secondCol">{{ denomination.value }}</td>
+        <td class="secondCol">
+          {{
+            denomination.value > 0 && secondColumnName === "Difference"
+              ? "+"
+              : ""
+          }}
+          {{ denomination.value }}
+        </td>
       </tr>
     </tbody>
   </table>

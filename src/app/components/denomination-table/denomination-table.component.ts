@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './denomination-table.component.css',
 })
 export class DenominationTableComponent {
-  @Input() denominationValues: any;
+  @Input() denominationValues?: Map<string, number>;
   @Input() secondColumnName: any;
 
   returnZero() {
