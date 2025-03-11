@@ -1,6 +1,6 @@
 <div class="container">
   <div class="denomination">
-    <label for="new Amount:"> Insert amount: </label>
+    <label for="new Amount:"> Insert amount in €: </label>
     <input
       type="number"
       value="0"
@@ -15,8 +15,8 @@
     ></app-denomination-table>
   </div>
   <div class="denomination-difference">
-    <label>New Amount: {{ newAmount }}</label>
-    <label>Old Amount: {{ oldAmount }}</label>
+    <label>New Amount: {{ newAmount }} €</label>
+    <label>Old Amount: {{ oldAmount }} €</label>
     <button (click)="calculateDifference()">Calculate Difference</button>
     <app-denomination-table
       [denominationValues]="differenceInDenominations"
