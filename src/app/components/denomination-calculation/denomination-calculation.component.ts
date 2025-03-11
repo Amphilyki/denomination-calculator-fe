@@ -13,7 +13,7 @@ import { catchError } from 'rxjs';
 })
 export class DenominationCalculationComponent implements OnInit {
   apiService = inject(ApiService);
-  quantityString : string = 'Quantity';
+  quantityString: string = 'Quantity';
   differenceString: string = 'Difference';
   denominations: Map<string, number> = new Map();
   differenceInDenominations: Map<string, number> = new Map();
@@ -23,8 +23,21 @@ export class DenominationCalculationComponent implements OnInit {
   oldAmount: number = 0;
   calculation: string = 'backend';
 
-  availableDenominations: number[] = [
-    200, 100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01,
+  availableDenominations: string[] = [
+    '200.00',
+    '100.00',
+    '50.00',
+    '20.00',
+    '10.00',
+    '5.00',
+    '2.00',
+    '1.00',
+    '0.50',
+    '0.20',
+    '0.10',
+    '0.05',
+    '0.02',
+    '0.01',
   ];
 
   ngOnInit(): void {
@@ -112,22 +125,19 @@ export class DenominationCalculationComponent implements OnInit {
       const oldDenominations = this.calculateDenominationsForAmount(
         this.oldAmount
       );
-
-      newDenominations.forEach((value: number, key: string) => {
-        let oldValue = oldDenominations.get(key);
-        if (oldValue == null) {
-          differenceInDenominations.set(key, value);
+      for (let nextDenomination of this.availableDenominations) {
+        let oldValue = oldDenominations.get(nextDenomination);
+        let newValue = newDenominations.get(nextDenomination);
+        if (oldValue == null && newValue != null) {
+          differenceInDenominations.set(nextDenomination, newValue);
         }
-        if (oldValue != null) {
-          let difference = oldValue - value;
-          differenceInDenominations.set(key, -difference);
-          oldDenominations.delete(key);
+        if (oldValue != null && newValue == null) {
+          differenceInDenominations.set(nextDenomination, -oldValue);
         }
-      });
-      if (oldDenominations.size > 0) {
-        oldDenominations.forEach((value: number, key: string) => {
-          differenceInDenominations.set(key, -value);
-        });
+        if (oldValue != null && newValue != null) {
+          let difference = oldValue - newValue;
+          differenceInDenominations.set(nextDenomination, -difference);
+        }
       }
       this.differenceInDenominations = differenceInDenominations;
     }

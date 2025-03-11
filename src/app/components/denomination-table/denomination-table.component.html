@@ -5,7 +5,9 @@
       <th>{{ secondColumnName }}</th>
     </tr>
     <tbody>
-      <tr *ngFor="let denomination of denominationValues | keyvalue">
+      <tr
+        *ngFor="let denomination of denominationValues | keyvalue : returnZero"
+      >
         <td class="firstCol">{{ denomination.key }}</td>
         <td class="secondCol">{{ denomination.value }}</td>
       </tr>
