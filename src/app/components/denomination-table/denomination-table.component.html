@@ -2,12 +2,12 @@
   <table>
     <tr>
       <th>Notes/Coins</th>
-      <th>{{secondColumnName}}</th>
+      <th>{{ secondColumnName }}</th>
     </tr>
     <tbody>
       <tr *ngFor="let denomination of denominationValues | keyvalue">
-        <td>{{ denomination.key }}</td>
-        <td>{{ denomination.value }}</td>
+        <td class="firstCol">{{ denomination.key }}</td>
+        <td class="secondCol">{{ denomination.value }}</td>
       </tr>
     </tbody>
   </table>
