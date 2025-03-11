@@ -1,13 +1,13 @@
 <div>
   <table>
     <tr>
-      <th> Notes/Coins</th>
-      <th> Quantity</th>
+      <th>Notes/Coins</th>
+      <th>Quantity</th>
     </tr>
     <tbody>
       <tr *ngFor="let denomination of denominationValues | keyvalue">
-        <td> {{denomination.key}}</td>
-        <td>{{denomination.value}}</td>
+        <td>{{ denomination.key }}</td>
+        <td>{{ denomination.value }}</td>
       </tr>
     </tbody>
   </table>

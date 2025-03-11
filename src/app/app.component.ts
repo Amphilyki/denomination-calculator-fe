@@ -7,7 +7,7 @@ import { DenominationCalculationComponent } from './components/denomination-calc
   selector: 'app-root',
   imports: [RouterOutlet, HeaderComponent, DenominationCalculationComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'denomination-calculator-fe';

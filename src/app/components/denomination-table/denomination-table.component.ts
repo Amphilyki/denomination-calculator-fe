@@ -5,10 +5,8 @@ import { CommonModule } from '@angular/common';
   selector: 'app-denomination-table',
   imports: [CommonModule],
   templateUrl: './denomination-table.component.html',
-  styleUrl: './denomination-table.component.css'
+  styleUrl: './denomination-table.component.css',
 })
 export class DenominationTableComponent {
   @Input() denominationValues: any;
-
 }
-
