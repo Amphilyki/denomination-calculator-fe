@@ -41,22 +41,9 @@ export class DenominationCalculationComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.denominations = new Map([
-      ['200.0', 0],
-      ['100.0', 0],
-      ['50.0', 0],
-      ['20', 0],
-      ['10', 0],
-      ['5.0', 0],
-      ['2.0', 0],
-      ['1', 0],
-      ['0.5', 0],
-      ['0.2', 0],
-      ['0.1', 0],
-      ['0.05', 0],
-      ['0.02', 0],
-      ['0.01', 0],
-    ]);
+    this.denominations = new Map(
+      this.availableDenominations.map((denomination) => [denomination, 0])
+    );
     this.calculation = 'backend';
   }
 
@@ -79,15 +66,19 @@ export class DenominationCalculationComponent implements OnInit {
         this.calculateDenominationsForAmount(this.newAmount);
       this.denominations = calculatedDenominations;
     }
+    this.updateAmountsHistory();
+    this.differenceInDenominations = new Map();
+  }
+
+  private updateAmountsHistory() {
     this.amountsHistory.unshift(this.newAmount);
     this.oldAmount = this.amountsHistory[1];
     if (this.amountsHistory.length > 2) {
       this.amountsHistory.pop();
     }
-    this.differenceInDenominations = new Map();
   }
 
-  calculateDenominationsForAmount(amount: number) {
+  private calculateDenominationsForAmount(amount: number) {
     const calculatedDenominations: Map<string, number> = new Map();
 
     for (let nextDenomination of this.availableDenominations) {
