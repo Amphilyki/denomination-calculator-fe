@@ -44,13 +44,12 @@ export class DenominationCalculationComponent implements OnInit {
     this.denominations = new Map(
       this.availableDenominations.map((denomination) => [denomination, 0])
     );
-    this.calculation = 'backend';
   }
 
   calculateDenomination() {
-   if (this.insertedAmount === null || this.insertedAmount < 0) {
-     return;
-   }
+    if (this.insertedAmount === null || this.insertedAmount < 0) {
+      return;
+    }
     this.newAmount = this.insertedAmount;
     if (this.calculation === 'backend') {
       this.apiService
@@ -131,7 +130,11 @@ export class DenominationCalculationComponent implements OnInit {
         }
         if (oldValue != null && newValue != null) {
           let difference = oldValue - newValue;
-          differenceInDenominations.set(nextDenomination, -difference);
+          if (difference != 0) {
+            differenceInDenominations.set(nextDenomination, -difference);
+          } else {
+            differenceInDenominations.set(nextDenomination, difference);
+          }
         }
       }
       this.differenceInDenominations = differenceInDenominations;
