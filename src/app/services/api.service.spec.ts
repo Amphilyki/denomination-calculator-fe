@@ -1,13 +1,16 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import apiService from './api.service';
 
-import DenominationCalculatorService from './api.service';
-
-describe('DenominationCalculatorService', () => {
-  let service: DenominationCalculatorService;
+describe('ApiService', () => {
+  let service: apiService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(DenominationCalculatorService);
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [apiService],
+    });
+    service = TestBed.inject(apiService);
   });
 
   it('should be created', () => {
