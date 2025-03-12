@@ -48,6 +48,9 @@ export class DenominationCalculationComponent implements OnInit {
   }
 
   calculateDenomination() {
+   if (this.insertedAmount === null || this.insertedAmount < 0) {
+     return;
+   }
     this.newAmount = this.insertedAmount;
     if (this.calculation === 'backend') {
       this.apiService
